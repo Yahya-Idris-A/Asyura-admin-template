@@ -37,9 +37,12 @@ export default function RequestAccessPage() {
         <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-primary/20 rounded-full blur-3xl" />
         <div className="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
 
-        <div className="relative z-10 flex items-center gap-2">
-          <Hexagon className="w-8 h-8 text-primary" />
-          <span className="font-bold text-xl tracking-tight text-foreground">UniDash</span>
+        <div className="relative z-10 flex items-center">
+          <img 
+              src="/Logo.png" 
+              alt="Brand Logo" 
+              className="h-12 w-auto object-contain" 
+            />
         </div>
 
         <div className="relative z-10 max-w-md">
@@ -52,7 +55,7 @@ export default function RequestAccessPage() {
         </div>
 
         <div className="relative z-10 text-sm text-foreground/40 font-medium">
-          © 2026 UniDash Architecture. All rights reserved.
+          © {new Date().getFullYear()} Asyura. All rights reserved.
         </div>
       </div>
 
@@ -64,9 +67,12 @@ export default function RequestAccessPage() {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="w-full max-w-md space-y-8 my-auto py-8"
         >
-          <div className="flex desktop:hidden items-center justify-center gap-2 mb-8">
-            <Hexagon className="w-8 h-8 text-primary" />
-            <span className="font-bold text-xl tracking-tight">UniDash</span>
+          <div className="flex desktop:hidden items-center justify-center mb-8">
+            <img 
+              src="/Logo.png" 
+              alt="Brand Logo" 
+              className="h-12 w-auto object-contain" 
+            />
           </div>
 
           <div className="text-center desktop:text-left space-y-2">

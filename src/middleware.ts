@@ -37,7 +37,8 @@ export const config = {
      * - _next/static (file statis Next.js)
      * - _next/image (file optimasi gambar Next.js)
      * - favicon.ico (icon browser)
+     * - Semua file dengan ekstensi gambar (.png, .jpg, .jpeg, .svg, .webp)
      */
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 };
