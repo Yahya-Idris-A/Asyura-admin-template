@@ -1,4 +1,4 @@
-# UniDash
+# Asyua Admin Template
 
 A clean, professional, and modern admin dashboard template built for high-performance web applications. Designed with a focus on a minimalist aesthetic and optimal user experience across all devices.
 
@@ -20,6 +20,14 @@ A clean, professional, and modern admin dashboard template built for high-perfor
 * **Security:** Middleware-protected routing with a robust whitelist approach.
 
 ## Getting Started
+
+## Demo Access
+
+This template uses a simulated authentication system for demonstration purposes. To explore the dashboard, you can bypass the Sign-In page by entering any validly formatted email address and any password.
+
+**Example:**
+* **Email:** admin@gmail.com
+* **Password:** anything
 
 ### Prerequisites
 
