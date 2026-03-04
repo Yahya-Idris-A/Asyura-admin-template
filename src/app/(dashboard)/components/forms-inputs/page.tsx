@@ -20,6 +20,7 @@ import { ProgressBar } from "@/components/atoms/Progress";
 import { Timeline } from "@/components/molecules/Timeline";
 import { Tooltip } from "@/components/atoms/Tooltip";
 import { Popconfirm } from "@/components/molecules/Popconfirm";
+import { WysiwygEditor } from "@/components/organisms/WysiwygEditor";
 
 export default function FormsInputsPage() {
   // --- States untuk komponen interaktif ---
@@ -29,6 +30,7 @@ export default function FormsInputsPage() {
   const [selectVal, setSelectVal] = useState("go");
   const [tags, setTags] = useState<string[]>(["PostgreSQL", "NextJS"]);
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const [wysiwygContent, setWysiwygContent] = useState("<h3>Welcome to UniDash Editor!</h3><p>Try making this text <strong>bold</strong> or adding a bullet list.</p>");
 
   // Dummy Data Timeline
   const timelineData = [
@@ -71,7 +73,7 @@ export default function FormsInputsPage() {
           <div className="flex items-center gap-2 mt-2">
             <span className="text-sm text-foreground/70 font-medium">Hover for more info: </span>
             {/* Tooltip diaplikasikan di icon */}
-            <Tooltip content="WeCore architecture relies on PostgreSQL for data integrity." position="top">
+            <Tooltip content="Project architecture relies on PostgreSQL for data integrity." position="top">
               <div className="p-1.5 rounded-full bg-primary/10 text-primary cursor-help">
                 <Info className="w-4 h-4" />
               </div>
@@ -199,7 +201,34 @@ export default function FormsInputsPage() {
 
         </div>
       </section>
+      
+      {/* SECTION 6: Rich Text Editor (WYSIWYG) */}
+      <section className="space-y-4">
+        <h2 className="text-lg font-semibold border-b border-border pb-2">6. Rich Text Editor</h2>
+        <div className="bg-card border border-border rounded-xl p-6 shadow-sm grid grid-cols-1 desktop:grid-cols-2 gap-8 items-start">
+          
+          {/* Kolom Kiri: Editor */}
+          <div>
+            <WysiwygEditor 
+              label="Article Content" 
+              value={wysiwygContent} 
+              onChange={setWysiwygContent} 
+              placeholder="Start writing your masterpiece here..."
+            />
+          </div>
 
+          {/* Kolom Kanan: Live Preview */}
+          <div className="flex flex-col gap-2">
+            <Label>Live Preview Output</Label>
+            <div 
+              // PENTING: Class 'prose' dari @tailwindcss/typography memastikan HTML kerender rapi
+              className="w-full min-h-[150px] max-h-[500px] overflow-y-auto p-4 rounded-xl border border-border bg-background/50 prose prose-sm sm:prose-base max-w-none text-foreground custom-scrollbar"
+              dangerouslySetInnerHTML={{ __html: wysiwygContent }}
+            />
+          </div>
+
+        </div>
+      </section>
     </div>
   );
 }

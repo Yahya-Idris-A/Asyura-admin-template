@@ -1,5 +1,6 @@
 /* src/styles/globals.css */
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 /* 1. Kustomisasi Breakpoints & Konfigurasi Bawaan Tailwind */
 @theme {

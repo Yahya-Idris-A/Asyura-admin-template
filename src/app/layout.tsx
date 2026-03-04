@@ -8,8 +8,18 @@ import { GlobalLoader } from "@/components/organisms/GlobalLoader";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-  title: "Universal Admin Template",
+  title: {
+    default: "Asyura Admin Template",
+    template: "%s | Asyura Admin Template",
+  },
   description: "Enterprise-grade dashboard architecture",
+  icons: {
+    icon: [
+      { url: "/Icon.png" },
+      { url: "/Icon.png", media: "(prefers-color-scheme: dark)" },
+    ],
+    apple: "/Icon.png", // Biasanya ukuran 180x180 px
+  },
 };
 
 export default function RootLayout({
@@ -19,7 +29,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} font-sans antialiased bg-background text-foreground min-h-screen`}>
+      <body
+        className={`${inter.variable} font-sans antialiased bg-background text-foreground min-h-screen`}
+      >
         {children}
         <ToastContainer />
         <ModalContainer />

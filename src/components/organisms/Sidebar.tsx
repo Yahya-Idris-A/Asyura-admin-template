@@ -9,9 +9,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { logoutUser } from "@/app/actions/auth";
 import { useToastStore } from "@/store/useToastStore";
+import { usePathname } from "next/navigation";
 
 export const Sidebar = () => {
   const router = useRouter();
+  const pathname = usePathname();
   const { isSidebarCollapsed } = useUIStore();
   const { addToast } = useToastStore();
 
@@ -30,20 +32,35 @@ export const Sidebar = () => {
       className="hidden tablet:flex flex-col h-screen bg-card border-r border-border sticky top-0 z-30"
     >
       {/* Sidebar Header (Logo & Brand) */}
-      <div className="h-16 flex items-center justify-between px-4 border-b border-border">
+      <div 
+        className={`h-16 flex items-center border-b border-border transition-all duration-200
+          ${isSidebarCollapsed ? "justify-center px-0" : "justify-start px-4"}
+        `}
+      >
         <Link
-          href="/home"
-          className="flex items-center gap-2 overflow-hidden whitespace-nowrap"
+          href="/dashboard"
+          className="flex items-center overflow-hidden whitespace-nowrap"
         >
-          <Hexagon className="w-8 h-8 text-primary shrink-0" />
-          {!isSidebarCollapsed && (
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="font-bold text-lg text-foreground tracking-tight"
-            >
-              UniDash
-            </motion.span>
+          {isSidebarCollapsed ? (
+            // 1. Logo Lingkaran (Tampil saat sidebar nutup)
+            <motion.img 
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              // TODO: Ganti nama file ini sesuai dengan logo lingkaran lo di folder public
+              src="/Icon.png" 
+              alt="Logo Icon" 
+              className="w-8 h-8 object-contain shrink-0"
+            />
+          ) : (
+            // 2. Logo Full dengan Teks (Tampil saat sidebar buka)
+            <motion.img
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              // TODO: Ganti nama file ini sesuai dengan logo full teks lo di folder public
+              src="/Logo.png" 
+              alt="Brand Logo" 
+              className="h-8 w-auto object-contain shrink-0"
+            />
           )}
         </Link>
       </div>
@@ -70,25 +87,41 @@ export const Sidebar = () => {
         {isSidebarCollapsed &&
           MENU_ITEMS.map((item, index) => {
             const hasChildren = item.children && item.children.length > 0;
+            const isActive = pathname.startsWith(item.href || "unmatchable");
 
             return (
-              <button
-                key={`mini-${index}`}
+            <div key={`mini-${index}`} className="relative group flex justify-center w-full mb-2">
+              
+              {/* --- BUMBU 1: Garis Indikator Kiri Meluncur --- */}
+              {isActive && (
+                <motion.div
+                  layoutId="sidebarMiniIndicator"
+                  className="absolute left-0 top-0 bottom-0 w-1 bg-primary rounded-r-md"
+                  transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                />
+              )}
+
+              <button 
                 onClick={() => {
                   if (hasChildren) {
-                    // Kalau punya anak, ekspansi sidebar!
                     useUIStore.getState().toggleSidebar();
                   } else {
-                    // Kalau nggak punya anak, langsung pindah halaman
                     if (item.href) router.push(item.href);
                   }
                 }}
-                className="flex items-center justify-center w-12 h-12 mx-auto mb-2 text-foreground/60 hover:text-primary hover:bg-primary/10 rounded-lg transition-colors"
+                className={`flex items-center justify-center w-10 h-10 rounded-xl transition-all duration-200
+                  ${isActive 
+                    ? "bg-primary/10 text-primary shadow-sm" // BUMBU 2: Glowing background
+                    : "text-foreground/60 hover:text-foreground hover:bg-background"
+                  }
+                `}
                 title={item.title}
               >
-                {item.icon && <item.icon className="w-5 h-5" />}
+                {/* BUMBU 3: Fill color kalau aktif */}
+                {item.icon && <item.icon className={`w-5 h-5 ${isActive ? "fill-primary/20" : ""}`} />}
               </button>
-            );
+            </div>
+          );
           })}
       </div>
 

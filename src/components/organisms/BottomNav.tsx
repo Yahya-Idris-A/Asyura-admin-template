@@ -4,6 +4,7 @@ import { LayoutDashboard, ShoppingBag, Users, Menu } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useUIStore } from "@/store/useUIStore";
+import { motion } from "framer-motion";
 
 export const BottomNav = () => {
   const pathname = usePathname();
@@ -28,8 +29,25 @@ export const BottomNav = () => {
               ${isActive ? "text-primary" : "text-foreground/50 hover:text-foreground"}
             `}
           >
-            <item.icon className="w-5 h-5" />
-            <span className="text-[10px] font-medium">{item.name}</span>
+            {isActive && (
+              <motion.div
+                layoutId="bottomNavBubble"
+                className="absolute inset-0 top-1.5 bottom-1.5 mx-2 bg-primary/10 rounded-xl -z-10"
+                transition={{ type: "spring", stiffness: 500, damping: 30 }}
+              />
+            )}
+            
+            {/* --- BUMBU: Ikon lompat dikit dan fill color --- */}
+            <motion.div
+              animate={{ y: isActive ? -2 : 0 }}
+              transition={{ type: "spring", stiffness: 500, damping: 30 }}
+            >
+              <item.icon className={`w-5 h-5 ${isActive ? "fill-primary/20" : ""}`} />
+            </motion.div>
+            
+            <span className={`text-[10px] font-medium ${isActive ? "font-bold" : ""}`}>
+              {item.name}
+            </span>
           </Link>
         );
       })}

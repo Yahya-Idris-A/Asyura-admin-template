@@ -1,14 +1,14 @@
 import "@/styles/globals.css";
-import type { Metadata } from "next";
+// import type { Metadata } from "next";
 import { BottomNav } from "@/components/organisms/BottomNav";
 import { MobileDrawer } from "@/components/organisms/MobileDrawer";
 import { Sidebar } from "@/components/organisms/Sidebar";
 import { Header } from "@/components/organisms/Header";
 
-export const metadata: Metadata = {
-  title: "Universal Admin Template",
-  description: "Enterprise-grade dashboard architecture",
-};
+// export const metadata: Metadata = {
+//   title: "Asyura Admin Template",
+//   description: "Enterprise-grade dashboard architecture",
+// };
 
 export default function RootLayout({
   children,

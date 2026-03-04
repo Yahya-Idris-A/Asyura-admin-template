@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useId } from "react";
 import { motion } from "framer-motion";
 import { Label } from "./Label";
 
@@ -12,7 +13,9 @@ export interface SwitchProps {
 }
 
 export const Switch = ({ checked, onChange, label, disabled = false, id }: SwitchProps) => {
-  const switchId = id || `switch-${Math.random().toString(36).substring(2, 9)}`;
+  const reactId = useId();
+
+  const switchId = id || `switch-${reactId}`;
 
   return (
     <div className="flex items-center gap-3">
