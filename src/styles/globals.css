@@ -1,0 +1,55 @@
+/* src/styles/globals.css */
+@import "tailwindcss";
+
+/* 1. Kustomisasi Breakpoints & Konfigurasi Bawaan Tailwind */
+@theme {
+  --breakpoint-mobile: 375px;
+  --breakpoint-tablet: 900px;
+  --breakpoint-desktop: 1280px;
+
+  /* Mapping warna custom agar terbaca oleh class Tailwind (misal: bg-primary) */
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-border: hsl(var(--border));
+  
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+}
+
+/* 2. Sistem Tema Gelap & Terang (Design Tokens) */
+@layer base {
+  :root {
+    /* Light Mode - Clean & Professional */
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 98%;
+    --primary: 221.2 83.2% 53.3%; /* Modern Blue */
+    --primary-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    /* Dark Mode - Deep & Sophisticated */
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 7%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --border: 217.2 32.6% 17.5%;
+  }
+}
+
+/* 3. Reset dasar tambahan jika diperlukan */
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
