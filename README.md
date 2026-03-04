@@ -1,4 +1,4 @@
-# Asyua Admin Template
+# Asyura Admin Template
 
 A clean, professional, and modern admin dashboard template built for high-performance web applications. Designed with a focus on a minimalist aesthetic and optimal user experience across all devices.
 
